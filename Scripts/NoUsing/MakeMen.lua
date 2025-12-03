@@ -1,0 +1,338 @@
+--MakeMen = CS.Wnd_Simple.CreateWindow("MakeMen");
+--ModifierMain:AddWindow("MakeMen",MakeMen);
+-- function MakeMen:OnInit()
+	-- self.WorldLuaHelper = CS.WorldLuaHelper();
+	-- self.sx = 680;
+	-- self.sy = 600;
+	-- self:SetTitle("人物创建");
+	-- self:SetSize(self.sx,self.sy);
+	-- self.ShowLable = self:AddLable("ShowLable","请开始你的表演！",self.sx/10*1,self.sy/10,300,35);
+	-- self.ShowLable:SetSize(self.sx/10*8,self.sy/10*1);
+	-- -- self:AddLable("lable1","季节修改",self.sy/10*4,self.sy/10,200,35);
+	-- -- QFWDModifierMainUI:AddButton2(self,"bntSetSeasonal1","春季",self.sx/10,self.sy/10*2);
+	-- -- QFWDModifierMainUI:AddButton2(self,"bntSetSeasonal2","夏季",self.sx/10*3,self.sy/10*2);
+	-- -- QFWDModifierMainUI:AddButton2(self,"bntSetSeasonal3","秋季",self.sx/10*5,self.sy/10*2);
+	-- -- QFWDModifierMainUI:AddButton2(self,"bntSetSeasonal4","冬季",self.sx/10*7,self.sy/10*2);
+
+	-- self:AddLable("lable3","属性编号:",self.sx/10,self.sy/10*2,200,35);
+	-- self.input1 = QFWDModifierMainUI:AddInput2(self,"input1","1",self.sx/10*2,self.sy/10*2);
+	-- self.input1:SetSize(50, 25, false);
+	-- self.input1.m_title.restrict = "[0-9]";
+	-- self.input1.m_title.maxLength = 3;
+	
+	-- self:AddLable("lable4","属性:",self.sx/10,self.sy/10*2.5,200,35);
+	-- self.input2 = QFWDModifierMainUI:AddInput2(self,"input2","清",self.sx/10*2,self.sy/10*2.5);
+	-- self.input2:SetSize(160, 25, false);
+	
+	-- self.ListAttribute = {};
+	
+	-- QFWDModifierMainUI:AddButton2(self,"bntSet","修改",self.sx/10*3,self.sy/10*3):SetSize(self.sx/10*1.2, 25, false);
+	-- QFWDModifierMainUI:AddButton2(self,"bntAddAMan","加入",self.sx/10*5.5,self.sy/10*3):SetSize(self.sx/10*1.2, 25, false);
+	-- self.Attributes=
+	-- {
+	-- "姓:(LastName)","名:(FirstName)","性别:(0.None 1.Male 2.Female)","年龄:(Age)","种族:(Race)",
+	-- "初始称号:(0.False 1.True)","称号名:","称号等级:","类型:(0.None 1.Player 2.Friend 3.Enemy)",
+	-- "贫富:(1-5)",
+	
+	-- "技能:None","喜爱程度:(0-2,5为禁用)","技能:Fight","喜爱程度:(0-2,5为禁用)","技能:Qi","喜爱程度:(0-2,5为禁用)","技能:SocialContact","喜爱程度:(0-2,5为禁用)",
+	-- "技能:Medicine","喜爱程度:(0-2,5为禁用)","技能:Cooking","喜爱程度:(0-2,5为禁用)","技能:Building","喜爱程度:(0-2,5为禁用)","技能:Farming","喜爱程度:(0-2,5为禁用)",
+	-- "技能:Mining","喜爱程度:(0-2,5为禁用)","技能:Art","喜爱程度:(0-2,5为禁用)","技能:Manual","喜爱程度:(0-2,5为禁用)","技能:DouFa","喜爱程度:(0-2,5为禁用)",
+	-- "技能:DanQi","喜爱程度:(0-2,5为禁用)","技能:Fabao","喜爱程度:(0-2,5为禁用)","技能:FightSkill","喜爱程度:(0-2,5为禁用)","技能:Barrier","喜爱程度:(0-2,5为禁用)",
+	-- "技能:Zhen","喜爱程度:(0-2,5为禁用)",
+	-- "Perception","Physique","Charisma","Intelligence","Luck",
+	-- "Pain","Consciousness","Meridian","Movement","Operation",
+	-- "Feeling"
+
+	-- }
+	-- self.Attribute=
+	-- {
+	-- "清","风","1","20","Human","1","无道","1","2","3",
+	
+	-- "20","2","20","2","20","2","20","2",
+	-- "20","2","20","5","20","2","20","2",
+	-- "20","2","20","2","20","2","20","2",
+	-- "20","2","20","2","20","2","20","2",
+	-- "20","2",
+	-- "9.5","9.5","9.5","9.5","9.5",
+	-- "1","1","1","3","1",
+	-- "1"
+	
+	-- }
+	
+	-- self.SkillList=
+	-- {
+		-- -- Token: 0x04000BFE RID: 3070
+		-- CS.XiaWorld.g_emNpcSkillType.None,
+		-- -- Token: 0x04000BFF RID: 3071
+		-- CS.XiaWorld.g_emNpcSkillType.Fight,
+		-- -- Token: 0x04000C00 RID: 3072
+		-- CS.XiaWorld.g_emNpcSkillType.Qi,
+		-- -- Token: 0x04000C01 RID: 3073
+		-- CS.XiaWorld.g_emNpcSkillType.SocialContact,
+		-- -- Token: 0x04000C02 RID: 3074
+		-- CS.XiaWorld.g_emNpcSkillType.Medicine,
+		-- -- Token: 0x04000C03 RID: 3075
+		-- CS.XiaWorld.g_emNpcSkillType.Cooking,
+		-- -- Token: 0x04000C04 RID: 3076
+		-- CS.XiaWorld.g_emNpcSkillType.Building,
+		-- -- Token: 0x04000C05 RID: 3077
+		-- CS.XiaWorld.g_emNpcSkillType.Farming,
+		-- -- Token: 0x04000C06 RID: 3078
+		-- CS.XiaWorld.g_emNpcSkillType.Mining,
+		-- -- Token: 0x04000C07 RID: 3079
+		-- CS.XiaWorld.g_emNpcSkillType.Art,
+		-- -- Token: 0x04000C08 RID: 3080
+		-- CS.XiaWorld.g_emNpcSkillType.Manual,
+		-- -- Token: 0x04000C09 RID: 3081
+		-- CS.XiaWorld.g_emNpcSkillType.DouFa,
+		-- -- Token: 0x04000C0A RID: 3082
+		-- CS.XiaWorld.g_emNpcSkillType.DanQi,
+		-- -- Token: 0x04000C0B RID: 3083
+		-- CS.XiaWorld.g_emNpcSkillType.Fabao,
+		-- -- Token: 0x04000C0C RID: 3084
+		-- CS.XiaWorld.g_emNpcSkillType.FightSkill,
+		-- -- Token: 0x04000C0D RID: 3085
+		-- CS.XiaWorld.g_emNpcSkillType.Barrier,
+		-- -- Token: 0x04000C0E RID: 3086
+		-- CS.XiaWorld.g_emNpcSkillType.Zhen,
+		-- -- Token: 0x04000C0F RID: 3087
+		-- CS.XiaWorld.g_emNpcSkillType._Count
+	-- }
+	-- self.BasePropertyType = 
+	-- {
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Perception,
+		-- -- Token: 0x04000BE2 RID: 3042
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Physique,
+		-- -- Token: 0x04000BE3 RID: 3043
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Charisma,
+		-- -- Token: 0x04000BE4 RID: 3044
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Intelligence,
+		-- -- Token: 0x04000BE5 RID: 3045
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Luck,
+		-- -- Token: 0x04000BE6 RID: 3046
+		-- -- Token: 0x04000BE7 RID: 3047
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Pain,
+		-- -- Token: 0x04000BE8 RID: 3048
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Consciousness,
+		-- -- Token: 0x04000BE9 RID: 3049
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Meridian,
+		-- -- Token: 0x04000BEA RID: 3050
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Movement,
+		-- -- Token: 0x04000BEB RID: 3051
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Operation,
+		-- -- Token: 0x04000BEC RID: 3052
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Feeling,
+		-- -- Token: 0x04000BED RID: 3053
+		-- CS.XiaWorld.g_emNpcBasePropertyType.Count
+	-- };
+	
+	-- self:AddCOP("RaceList",self.sx/10*10,self.sy/10*0.7);
+	
+	-- self:AddLable("plable1","召唤的坐标:",self.sx/10*7,self.sy/10*1.5,200,35);
+	-- self:AddLable("lablex","横坐标X:",self.sx/10*7,self.sy/10*2,200,35);
+	-- self.input11 = QFWDModifierMainUI:AddInput2(self,"input11","80",self.sx/10*8,self.sy/10*2);
+	-- self.input11:SetSize(40, 25, false);
+	-- self.input11.m_title.restrict = "[0-9]";
+	-- self.input11.m_title.maxLength = 3;
+	-- self:AddLable("labley","纵坐标Y:",self.sx/10*7,self.sy/10*2.5,200,35);
+	-- self.input21 = QFWDModifierMainUI:AddInput2(self,"input21","80",self.sx/10*8,self.sy/10*2.5);
+	-- self.input21:SetSize(40, 25, false);
+	-- self.input21.m_title.restrict = "[0-9]";
+	-- self.input21.m_title.maxLength = 3;
+	
+	-- self.window:Center();
+-- end
+
+-- function MakeMen:OnShowUpdate()
+	
+-- end
+
+-- function MakeMen:OnShown()
+	-- MakeMen.isShowing = true
+-- end
+
+-- function MakeMen:OnUpdate()
+
+-- end
+
+-- function MakeMen:OnHide()
+	-- MakeMen.isShowing = false;
+	-- ModifierMain.showWindow=0;
+-- end
+
+-- function MakeMen:OnObjectEvent(t,obj,context)
+	-- print(t,obj,obj.name)
+	-- if t == "onClick" then
+		-- local num = 0;
+		-- if obj.name == "bntSet" then
+			-- num = tonumber(MakeMen.input1.m_title.text);
+			-- if num == nil then
+				-- MakeMen.ShowLable.text = "编号为空,修改失败!";
+				-- return;
+			-- elseif num > #MakeMen.Attribute then
+				-- MakeMen.ShowLable.text = "编号溢出,修改失败!";
+				-- return;
+			-- else
+				-- MakeMen.Attribute[num] = MakeMen.input2.m_title.text;
+				-- MakeMen.ListAttribute[num].m_title.text = tostring(num)..": "..MakeMen.Attribute[num];
+				-- MakeMen.ShowLable.text = "修改:"..MakeMen.Attributes[num].."   内容:"..MakeMen.Attribute[num].."    成功!";
+				-- return;
+			-- end
+		-- end
+		-- if obj.name == "bntAddAMan" then
+				-- MakeMen:AddAMan();
+				-- MakeMen.ShowLable.text = "添加:  "..MakeMen.Attributes[1]..MakeMen.Attributes[2].."   成功!";
+		-- end
+	-- end
+-- end
+
+
+-- function MakeMen:AddAMan()
+	-- local num = 0;
+	-- num = 5;
+	-- if  tonumber(MakeMen.Attribute[num]) ~= nil  then
+		-- MakeMen.Attribute[num] = QFWDlib.race[tonumber(MakeMen.Attribute[num])];
+		
+	-- end
+	
+	-- num = tonumber(MakeMen.Attribute[9]);
+	-- local types = CS.XiaWorld.Fight.g_emFightCamp.Player;
+	-- if num == 0 then
+		-- types=CS.XiaWorld.Fight.g_emFightCamp.None;
+	-- elseif num == 1 then
+		-- types=CS.XiaWorld.Fight.g_emFightCamp.Player;
+	-- elseif num == 2 then
+		-- types=CS.XiaWorld.Fight.g_emFightCamp.Friend;
+	-- else
+		-- types=CS.XiaWorld.Fight.g_emFightCamp.Enemy;
+	-- end
+	
+	-- num = tonumber(MakeMen.Attribute[3]);
+	-- local sex = CS.XiaWorld.g_emNpcSex.Male;
+	-- if num == 0 then
+		-- sex=CS.XiaWorld.g_emNpcSex.None;
+	-- elseif num == 1 then
+		-- sex=CS.XiaWorld.g_emNpcSex.Male;
+	-- else
+		-- sex=CS.XiaWorld.g_emNpcSex.Female;
+	-- end
+	
+	-- local richExtent = CS.XiaWorld.g_emNpcRichLable.Richest;
+	-- num = tonumber(MakeMen.Attribute[10]);
+	-- if num == 1 then
+		-- richExtent=CS.XiaWorld.g_emNpcRichLable.Poorest;
+	-- elseif num == 2 then
+		-- richExtent=CS.XiaWorld.g_emNpcRichLable.Poor;
+	-- elseif num == 3 then
+		-- richExtent=CS.XiaWorld.g_emNpcRichLable.Normal;
+	-- elseif num == 4 then
+		-- richExtent=CS.XiaWorld.g_emNpcRichLable.Rich;
+	-- else
+		-- richExtent=CS.XiaWorld.g_emNpcRichLable.Richest;
+	-- end
+	-- -- ThingMgr:AddNpc(MakeMen.Attribute[5], 60, World.map,1)
+	-- local maps = World.map;
+	-- local raceDefs = NpcMgr:GetRaceDef(MakeMen.Attribute[5]);
+	-- local npc = ThingMgr:AddEmptyNpcThing(raceDefs.Template);
+	-- npc:InitNpc(raceDefs, true, false, false, sex);
+	-- npc.PropertyMgr:RandomAgeSexAndName(sex, true);
+	
+
+	-- --npc.PropertyMgr.Sex = sex;
+	-- npc.PropertyMgr.PrefixName = MakeMen.Attribute[1];
+	-- npc.PropertyMgr.SuffixName = MakeMen.Attribute[2];
+	-- NpcMgr:AddNpc(npc, MakeMen:GetKey(tonumber(MakeMen.input11.m_title.text),tonumber(MakeMen.input21.m_title.text)), maps, types);
+	-- if MakeMen.Attribute[6]==1 then
+		-- npc:AddTitle(MakeMen.Attribute[7]);
+	-- end
+	-- npc.PropertyMgr.Age = tonumber(MakeMen.Attribute[4]);
+	-- --npc.PropertyMgr:AddAge(tonumber(MakeMen.Attribute[5]), true);
+	-- for y=1,#MakeMen.SkillList-1 do
+		-- npc.PropertyMgr.SkillData:AddSkillBaseLevel(MakeMen.SkillList[y], tonumber(MakeMen.Attribute[y*2-1+10]), true);
+		-- npc.PropertyMgr.SkillData:AddSkillLove(MakeMen.SkillList[y], tonumber(MakeMen.Attribute[y*2+10]),true);
+		-- if tonumber(MakeMen.Attribute[y*2+10])>=5 then
+			-- npc.PropertyMgr.SkillData:BanSkill(MakeMen.SkillList[y],true);
+		-- end
+		-- print(#MakeMen.SkillList-1);
+	-- end
+	-- num = (#MakeMen.SkillList-1)*2+1;
+	-- for x=1,#MakeMen.BasePropertyType-1 do
+		-- npc.PropertyMgr.BaseData:SetBaseValue(MakeMen.BasePropertyType[x], tonumber(MakeMen.Attribute[num+10]));
+		
+		-- print(MakeMen.Attribute[num +10]);
+		-- num = num + 1;
+	-- end
+	-- ThingMgr:EquptNpc(npc, 0,richExtent , false, false, 0, 0, false, false);
+	
+		-- --npc.PropertyMgr.BaseData:BanSkill(MakeMen.SkillList[y],true);
+	-- --npc.PropertyMgr.SkillData:AddSkillBaseLevel(CS.XiaWorld.g_emNpcSkillType.Cooking, 5, true);
+	
+	-- --local npc = ThingMgr:AddNpc(MakeMen.Attribute[5],1,nil,types);
+	-- -- npc:AddTitle("清风");
+	-- --npc.PropertyMgr:SetSex(CS.XiaWorld.g_emNpcSex.Female);
+-- end
+-- function MakeMen:GetKey(x,y)
+	-- if x > Map.Size then
+		-- x = Map.Size;
+		-- self.WorldLuaHelper:ShowMsgBox("输入的X值溢出！","异常");
+	-- end
+	-- if y > Map.Size then
+		-- y = Map.Size;
+		-- self.WorldLuaHelper:ShowMsgBox("输入的Y值溢出！","异常");
+	-- end
+	-- return x + y * (Map.Size);
+
+-- end
+
+-- function MakeMen:AddFuButton(names,value,texts,x,y)
+	-- local obj = self:AddObjectFromUrl("ui://0xrxw6g7fevgbb",x,y);
+	-- obj.text = value;
+	-- obj.name = names;
+	-- obj.tooltips = texts;
+	-- return obj;
+-- end
+-- function MakeMen:AddInput(name,value,x,y)
+	-- local obj = self:AddObjectFromUrl("ui://0xrxw6g7hdhl1c",x,y);
+	-- obj.m_title.text = value;
+	-- obj.name = name;
+	-- return obj;
+-- end
+-- function MakeMen:AddCheckBox(name,value,x,y)
+	-- local obj = self:AddObjectFromUrl("ui://0xrxw6g7hdhl1a",x,y);
+	-- obj.m_title.text = value;
+	-- obj.name = name;
+	-- return obj;
+-- end
+-- function MakeMen:AddChildToList(tobj,name,value)
+	-- local obj = tobj.m_list:AddItemFromPool("ui://0xrxw6g77xrwaf");
+	-- obj.name = name;
+	-- obj:SetSize(self.sx/10*3.2, 20, false);
+	-- obj.m_title.text = value;
+	-- obj.onClick:Add(MapSet.ListChildOnClick);
+	-- return obj;
+-- end
+-- function MakeMen:AddCOP(name,x,y)
+	-- local obj = self:AddObjectFromUrl("ui://0xrxw6g7m8j0ovnz",x,y);
+	-- obj.name = name;
+	-- --obj.m_button.name = name;
+	-- obj:SetSize(self.sx/10*3.5, self.sy/10*6, false);
+	-- obj.m_title.text = "属性";
+	-- obj.m_dele.text="无";
+	-- obj.m_dele:SetSize(0, 0, false);
+	-- obj.m_upload.text="无";
+	-- obj.m_upload:SetSize(0, 0, false);
+	-- obj.m_save.text="无";
+	-- obj.m_save:SetSize(0, 0, false);
+	-- --MakeMen:AddChildToList(obj,"1",QFWDlib.race[1]);
+	-- for k, v in pairs(MakeMen.Attribute) do
+		-- --ThingMgr:GetDef(2,v.Item)
+		-- --print(k);
+		-- --ThingMgr:AddItemThing(2,v.Item);
+		-- MakeMen:AddChildToList(obj,tostring(k)*2-1,MakeMen.Attributes[k]);
+		-- MakeMen.ListAttribute[k] = MakeMen:AddChildToList(obj,tostring(k)*2,tostring(k)..": "..MakeMen.Attribute[k]);
+	-- end
+
+	-- -- local list = obj.m_list;
+	-- -- list:AddItemFromPool("ui://0xrxw6g7hdhl0");
+	-- return obj;
+-- end
